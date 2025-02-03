@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login Required</h2>
+    <script>
+        // Read cookies
+        function getCookie(name) {
+            let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            return match ? match[2] : null;
+        }
+
+        let authCookie = getCookie("auth");
+
+        // If cookie contains SQL Injection (bypass)
+        if (authCookie && authCookie.includes("1'='1")) {
+            document.body.innerHTML = "<h1>Login Successful! Flag: FLAG{XSS_SQL_BYPASS}</h1>";
+        } else {
+            document.body.innerHTML += "<p>Invalid authentication. Please log in.</p>";
+        }
+    </script>
+</body>
+</html>
