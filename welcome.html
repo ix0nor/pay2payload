@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+</head>
+<body>
+    <h1>Welcome, <span id="user"></span>!</h1>
+    <script>
+        // Get URL parameter
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get("name");
+
+        // Injecting directly (XSS Vulnerability)
+        document.getElementById("user").innerHTML = name;
+
+        // Set hidden cookie (SQL Query)
+        document.cookie = "auth=SELECT * FROM users WHERE username='admin' AND password='?'; path=/";
+    </script>
+</body>
+</html>
